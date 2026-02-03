@@ -1,0 +1,19 @@
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ProductService {
+  constructor() {}
+  products = [
+    { id: 'p1', name: 'coca', quantity: 3, price: 12000 },
+    { id: 'p2', name: 'pepsi', quantity: 5, price: 15000 },
+    { id: 'p3', name: 'sting', quantity: 2, price: 18000 },
+    { id: 'p4', name: 'aqua', quantity: 4, price: 6000 },
+    { id: 'p5', name: 'lavie', quantity: 1, price: 5000 },
+    { id: 'p6', name: 'fanta', quantity: 6, price: 14000 },
+  ];
+  getAllProducts() {
+    return this.products;
+  }
+}

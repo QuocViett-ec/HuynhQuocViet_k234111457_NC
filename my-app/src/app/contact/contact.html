@@ -1,0 +1,20 @@
+<p>contact works!</p>
+<table border="1">
+  <tr>
+    <td>Name</td>
+    <td>{{ contact_name }}</td>
+  </tr>
+  <tr>
+    <td>Email</td>
+    <td>{{ contact_email }}</td>
+  </tr>
+  <tr>
+    <td>Phone</td>
+    <td>{{ contact_phone }}</td>
+  </tr>
+  <tr>
+    <td colspan="2" style="text-align: right">
+      <input type="button" value="send" (click)="sendContact(contact_name)" />
+    </td>
+  </tr>
+</table>

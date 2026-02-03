@@ -1,0 +1,68 @@
+<form class="container" novalidate>
+  <h3 class="text-center">{{ 'Form đăng ký' | uppercase }}</h3>
+
+  <div class="mb-3">
+    <label for="name">Tên</label>
+    <input
+      type="text"
+      class="form-control"
+      #name="ngModel"
+      id="name"
+      placeholder="Nhập tên"
+      [(ngModel)]="studentModel.name"
+      name="name"
+      required
+      [class.is-invalid]="name.invalid && (name.dirty || name.touched)"
+    />
+
+    <small class="text-danger" *ngIf="name.invalid && (name.dirty || name.touched)"
+      >Tên không được để trống</small
+    >
+  </div>
+
+  <div class="mb-3">
+    <label for="email">Email</label>
+    <input
+      type="email"
+      class="form-control"
+      #email="ngModel"
+      id="email"
+      placeholder="Nhập email"
+      [(ngModel)]="studentModel.email"
+      name="email"
+      required
+      email
+      [class.is-invalid]="email.invalid && (email.dirty || email.touched)"
+    />
+
+    <small
+      class="text-danger"
+      *ngIf="(email.dirty || email.touched) && email.errors && email.errors['required']"
+      >Email không được để trống</small
+    >
+    <small
+      class="text-danger"
+      *ngIf="(email.dirty || email.touched) && email.errors && email.errors['email']"
+      >Email không hợp lệ</small
+    >
+  </div>
+
+  <div class="mb-3">
+    <label for="course">Chọn Khóa Học</label>
+    <select
+      class="form-select"
+      id="course"
+      [(ngModel)]="studentModel.course"
+      name="course"
+      #course="ngModel"
+      required
+      [class.is-invalid]="course.invalid && (course.dirty || course.touched)"
+    >
+      <option value="" disabled>------------</option>
+      <option *ngFor="let course of courses" [value]="course">{{ course }}</option>
+    </select>
+    <small class="text-danger" *ngIf="course.invalid && (course.dirty || course.touched)"
+      >Vui lòng chọn khóa học</small
+    >
+  </div>
+</form>

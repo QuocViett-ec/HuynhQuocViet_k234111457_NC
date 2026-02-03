@@ -1,0 +1,70 @@
+<h1>Welcome to My App!</h1>
+<!--<app-mybinding></app-mybinding>
+<app-ptb1></app-ptb1>
+<app-gpa></app-gpa>
+<app-ptb2></app-ptb2>
+<app-learn-ditective></app-learn-ditective>
+<app-list-product-1></app-list-product-1>
+<app-list-product-2></app-list-product-2>
+<app-customer></app-customer>
+<app-list-product-3></app-list-product-3>
+<app-ex18></app-ex18>
+<app-ex10></app-ex10>
+<app-ex13></app-ex13>
+<router-outlet></router-outlet>
+<app-service-product-image-event></app-service-product-image-event>
+<app-ex14></app-ex14>
+<app-ex19></app-ex19>-->
+<head>
+  <title>hqv - Ex37</title>
+  <link rel="stylesheet" href="../app/app.css" />
+</head>
+<body>
+  <div id="container">
+    <ul>
+      <li><a href="#">HOME</a></li>
+      <li>
+        <a href="#">PRODUCTS</a>
+        <ul>
+          <li><a routerLink="/product-1">PRODUCTS 1</a></li>
+          <li><a routerLink="/product-2">PRODUCTS 2</a></li>
+          <li><a routerLink="/product-3">PRODUCTS 3</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">Customers</a>
+        <ul>
+          <li><a routerLink="/list-customers">Customer List</a></li>
+          <li><a routerLink="/list-customers-service">Customer List - Service</a></li>
+          <li><a routerLink="/list-customers-http-service">Customer List - HTTP Service</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">JAVASCRIPT</a>
+        <ul>
+          <li><a href="#">Lesson01</a></li>
+          <li><a href="#">Lesson02</a></li>
+          <li><a href="#">Lesson03</a></li>
+        </ul>
+      </li>
+      <li><a href="#">HTML DOM</a></li>
+      <li><a routerLink="/ABOUT">ABOUT</a></li>
+      <li>
+        <a href="#">FORMS</a>
+        <ul>
+          <li><a routerLink="/form">Form</a></li>
+          <li><a routerLink="/reactive">Reactive</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">External API</a>
+        <ul>
+          <li><a routerLink="/ex26">Exercise 26</a></li>
+          <li><a routerLink="/ex27">Exercise 27</a></li>
+          <li><a>Exercise 28</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</body>
+<router-outlet></router-outlet>

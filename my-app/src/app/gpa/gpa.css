@@ -1,0 +1,94 @@
+:host {
+  display: block;
+  padding: 16px;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+  --gpa-bg: #0b1220;
+  --gpa-surface: rgba(255, 255, 255, 0.06);
+  --gpa-border: rgba(255, 255, 255, 0.1);
+  --gpa-text: rgba(255, 255, 255, 0.92);
+  --gpa-muted: rgba(255, 255, 255, 0.7);
+  --gpa-accent: rgba(99, 102, 241, 0.95);
+  --gpa-accent-soft: rgba(99, 102, 241, 0.16);
+}
+
+.gpa-card {
+  max-width: 720px;
+  margin: 12px auto;
+  padding: 18px;
+  border-radius: 14px;
+  color: var(--gpa-text);
+  background: radial-gradient(900px 240px at 10% 0%, var(--gpa-accent-soft), transparent 60%),
+    radial-gradient(900px 240px at 90% 0%, rgba(34, 211, 238, 0.12), transparent 55%), var(--gpa-bg);
+  border: 1px solid var(--gpa-border);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+.gpa-title {
+  margin: 0 0 14px 0;
+  font-size: 20px;
+  letter-spacing: 0.2px;
+}
+
+.gpa-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.gpa-label {
+  width: 44%;
+  color: var(--gpa-muted);
+  padding-right: 12px;
+  vertical-align: middle;
+}
+
+.gpa-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--gpa-border);
+  background: var(--gpa-surface);
+  color: var(--gpa-text);
+  outline: none;
+}
+
+.gpa-input:focus {
+  border-color: rgba(99, 102, 241, 0.75);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.18);
+}
+
+.gpa-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.gpa-btn {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(99, 102, 241, 0.55);
+  background: rgba(99, 102, 241, 0.22);
+  color: var(--gpa-text);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.gpa-btn:hover {
+  background: rgba(99, 102, 241, 0.3);
+}
+
+.gpa-btn:active {
+  transform: translateY(1px);
+}
+
+.gpa-btn--ghost {
+  border-color: var(--gpa-border);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--gpa-muted);
+}
+
+.gpa-btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--gpa-text);
+}

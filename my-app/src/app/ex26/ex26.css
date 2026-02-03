@@ -1,0 +1,19 @@
+table img {
+  object-fit: contain;
+}
+
+.desc {
+  max-width: 420px;
+  white-space: normal;
+}
+
+h3.text-center {
+  margin: 0;
+  padding: 10px;
+  background: #1f2937;
+  color: #fff;
+}
+
+table {
+  margin-top: 0;
+}

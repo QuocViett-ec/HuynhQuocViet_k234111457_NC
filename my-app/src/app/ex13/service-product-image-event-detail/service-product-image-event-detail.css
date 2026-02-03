@@ -1,0 +1,18 @@
+button {
+  margin-bottom: 10px;
+}
+
+table {
+  border: 1px solid #333;
+  padding: 10px;
+}
+
+td {
+  padding: 6px 10px;
+}
+
+img {
+  width: 140px;
+  height: auto;
+  display: block;
+}

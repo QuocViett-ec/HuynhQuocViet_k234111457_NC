@@ -1,0 +1,21 @@
+<button (click)="goBack()">Go Back</button>
+
+<table *ngIf="selectedProduct as p">
+  <tr>
+    <td>ID:</td>
+    <td>{{ p.ProductId }}</td>
+  </tr>
+  <tr>
+    <td>Name:</td>
+    <td>{{ p.ProductName }}</td>
+  </tr>
+  <tr>
+    <td>Price:</td>
+    <td>{{ p.Price }}</td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img [src]="'/' + p.Image" [alt]="p.ProductName" />
+    </td>
+  </tr>
+</table>

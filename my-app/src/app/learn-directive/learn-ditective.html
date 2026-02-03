@@ -1,0 +1,62 @@
+<p>learn-ditective works!</p>
+<button (click)="change_view()">Change View</button>
+<div>
+  <table border="1">
+    <tr>
+      <td>Id</td>
+      <td>Name</td>
+    </tr>
+    <tr>
+      <td>01</td>
+      <td>pepsi</td>
+    </tr>
+    <tr>
+      <td>02</td>
+      <td>coke</td>
+    </tr>
+  </table>
+</div>
+
+<ng-template [ngIf]="show_view == 2">
+  <table border="1">
+    <tr>
+      <Td>product</Td>
+      <td>price</td>
+    </tr>
+    <tr>
+      <td>pepsi</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>coke</td>
+      <td>12</td>
+    </tr>
+  </table>
+</ng-template>
+<h1>Learn ngFor</h1>
+<h3>List of Provinces</h3>
+<p *ngFor="let province of provinces">{{ province }}</p>
+<select>
+  <option *ngFor="let province of provinces">{{ province }}</option>
+</select>
+<ol>
+  <li *ngFor="let province of provinces">{{ province }}</li>
+</ol>
+<table border="1">
+  <thead>
+    <tr>
+      <th>Product ID</th>
+      <th>Product Name</th>
+      <th>Product Price</th>
+      <th>Product Image</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{ product.id }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.price }}</td>
+      <td><img [src]="product.image" alt="{{ product.name }}" width="100" /></td>
+    </tr>
+  </tbody>
+</table>

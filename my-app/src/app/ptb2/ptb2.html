@@ -1,0 +1,24 @@
+<p>ptb2 works!</p>
+<table>
+  <tr>
+    <td>A:</td>
+    <td><input type="number" [(ngModel)]="a_num" /></td>
+  </tr>
+  <tr>
+    <td>B:</td>
+    <td><input type="number" [(ngModel)]="b_num" /></td>
+  </tr>
+  <tr>
+    <td>C:</td>
+    <td><input type="number" [(ngModel)]="c_num" /></td>
+  </tr>
+  <tr>
+    <td>Result:</td>
+    <td><input type="text" [value]="result" readonly /></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <button (click)="get_solution()">Calculate</button>
+    </td>
+  </tr>
+</table>

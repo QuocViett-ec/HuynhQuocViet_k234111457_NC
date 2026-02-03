@@ -1,0 +1,22 @@
+<p>customer-detail works!</p>
+<button (click)="goBack()">Back to Customer List</button>
+<table border="1">
+  <tr>
+    <td>ID:</td>
+    <td>{{ selectedCustomer.id }}</td>
+  </tr>
+  <tr>
+    <td>Name:</td>
+    <td>{{ selectedCustomer.name }}</td>
+  </tr>
+  <tr>
+    <td>Gender:</td>
+    <td>{{ selectedCustomer.gender }}</td>
+  </tr>
+  <tr>
+    <td>Image:</td>
+    <td>
+      <img width="100" height="100" src="{{ selectedCustomer.image }}" />
+    </td>
+  </tr>
+</table>

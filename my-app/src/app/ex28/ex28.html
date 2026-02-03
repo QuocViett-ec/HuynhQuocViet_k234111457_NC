@@ -1,0 +1,109 @@
+<div class="ex28-container">
+  <h1>Exercise 28: Coindesk API - Bitcoin Price Index in Real-time</h1>
+
+  <div class="controls">
+    <label class="toggle">
+      <input
+        type="checkbox"
+        [checked]="autoRefresh"
+        (change)="onAutoRefreshToggle($any($event.target).checked)"
+      />
+      <span>Auto refresh</span>
+    </label>
+
+    <label class="interval">
+      <span>Interval:</span>
+      <select
+        [disabled]="!autoRefresh"
+        [value]="refreshIntervalMs"
+        (change)="onIntervalChange(+$any($event.target).value)"
+      >
+        <option [value]="5000">5s</option>
+        <option [value]="10000">10s</option>
+        <option [value]="30000">30s</option>
+        <option [value]="60000">60s</option>
+      </select>
+    </label>
+
+    <button class="refresh-btn" (click)="refresh()" [disabled]="loading || refreshing">
+      🔄 Refresh now
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Loading Bitcoin Price Index...</p>
+  </div>
+
+  <div class="loading" *ngIf="refreshing && !loading">
+    <p>Refreshing...</p>
+  </div>
+
+  <!-- Error State -->
+  <div class="error" *ngIf="error && !loading">
+    <p>⚠️ {{ error }}</p>
+    <button (click)="refresh()">Try Again</button>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content" *ngIf="bitcoinData && !loading">
+    <!-- Header Information -->
+    <div class="header-section">
+      <h2>{{ bitcoinData.chartName }}</h2>
+      <div class="info-row">
+        <span><strong>Updated:</strong> {{ bitcoinData.time.updated }}</span>
+        <span *ngIf="lastUpdated"
+          ><strong>Loaded at:</strong> {{ lastUpdated | date: 'medium' }}</span
+        >
+      </div>
+      <p class="disclaimer">{{ bitcoinData.disclaimer }}</p>
+    </div>
+
+    <!-- Bitcoin Price Index Table -->
+    <div class="bpi-section">
+      <h3>Bitcoin Price Index (BPI)</h3>
+      <table class="bpi-table">
+        <thead>
+          <tr>
+            <th>Currency</th>
+            <th>Code</th>
+            <th>Symbol</th>
+            <th>Rate</th>
+            <th>Rate (Numeric)</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let currency of getCurrencies()">
+            <td class="currency-name">{{ currency }}</td>
+            <td class="currency-code">{{ bitcoinData.bpi[currency].code }}</td>
+            <td class="currency-symbol" [innerHTML]="bitcoinData.bpi[currency].symbol"></td>
+            <td class="rate">{{ bitcoinData.bpi[currency].rate }}</td>
+            <td class="rate-float">{{ bitcoinData.bpi[currency].rate_float | number: '1.2-2' }}</td>
+            <td class="description">{{ bitcoinData.bpi[currency].description }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Time Details -->
+    <div class="time-section">
+      <h3>Time Information</h3>
+      <div class="time-grid">
+        <div class="time-item">
+          <strong>Updated:</strong>
+          <span>{{ bitcoinData.time.updated }}</span>
+        </div>
+        <div class="time-item">
+          <strong>Updated ISO:</strong>
+          <span>{{ bitcoinData.time.updatedISO }}</span>
+        </div>
+        <div class="time-item">
+          <strong>Updated UK:</strong>
+          <span>{{ bitcoinData.time.updateduk }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

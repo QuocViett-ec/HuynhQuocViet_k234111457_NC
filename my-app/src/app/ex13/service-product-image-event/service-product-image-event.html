@@ -1,0 +1,54 @@
+<!-- List View -->
+<div *ngIf="!selectedProduct">
+  <table border="1">
+    <thead>
+      <tr>
+        <td>Product ID</td>
+        <td>Product Name</td>
+        <td>Unit Price</td>
+        <td>Picture</td>
+        <td>#</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of products">
+        <td>{{ p.ProductId }}</td>
+        <td>{{ p.ProductName }}</td>
+        <td>{{ p.Price }}</td>
+        <td>
+          <img [src]="'/' + p.Image" [alt]="p.ProductName" />
+        </td>
+        <td>
+          <a style="cursor: pointer" (click)="viewDetail(p)" title="Click here to view detail"
+            >Details</a
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Detail View -->
+<div *ngIf="selectedProduct">
+  <button (click)="goBack()">Go Back</button>
+
+  <table>
+    <tr>
+      <td>ID:</td>
+      <td>{{ selectedProduct.ProductId }}</td>
+    </tr>
+    <tr>
+      <td>Name:</td>
+      <td>{{ selectedProduct.ProductName }}</td>
+    </tr>
+    <tr>
+      <td>Price:</td>
+      <td>{{ selectedProduct.Price }}</td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <img [src]="'/' + selectedProduct.Image" [alt]="selectedProduct.ProductName" />
+      </td>
+    </tr>
+  </table>
+</div>

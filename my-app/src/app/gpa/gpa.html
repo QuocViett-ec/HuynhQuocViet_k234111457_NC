@@ -1,0 +1,84 @@
+<div class="gpa-card">
+  <h2 class="gpa-title">Tính điểm GPA</h2>
+
+  <table class="gpa-table">
+    <tr>
+      <td class="gpa-label">Điểm quá trình</td>
+      <td>
+        <input
+          class="gpa-input"
+          type="number"
+          min="0"
+          max="10"
+          step="0.1"
+          #process
+          (input)="onScoresChange(process.value, midterm.value, finalExam.value)"
+          placeholder="0 - 10"
+        />
+      </td>
+    </tr>
+    <tr>
+      <td class="gpa-label">Điểm giữa kì</td>
+      <td>
+        <input
+          class="gpa-input"
+          type="number"
+          min="0"
+          max="10"
+          step="0.1"
+          #midterm
+          (input)="onScoresChange(process.value, midterm.value, finalExam.value)"
+          placeholder="0 - 10"
+        />
+      </td>
+    </tr>
+    <tr>
+      <td class="gpa-label">Điểm cuối kì</td>
+      <td>
+        <input
+          class="gpa-input"
+          type="number"
+          min="0"
+          max="10"
+          step="0.1"
+          #finalExam
+          (input)="onScoresChange(process.value, midterm.value, finalExam.value)"
+          placeholder="0 - 10"
+        />
+      </td>
+    </tr>
+    <tr>
+      <td class="gpa-label">Điểm</td>
+      <td>
+        <input class="gpa-input" type="text" [value]="gpa === null ? '' : gpa" readonly />
+      </td>
+    </tr>
+    <tr>
+      <td class="gpa-label">Phân loại</td>
+      <td>
+        <input class="gpa-input" type="text" [value]="classification" readonly />
+      </td>
+    </tr>
+    <tr>
+      <td class="gpa-label">Thao tác</td>
+      <td>
+        <div class="gpa-actions">
+          <button
+            class="gpa-btn gpa-btn--ghost"
+            type="button"
+            (click)="clear(process, midterm, finalExam)"
+          >
+            Clear
+          </button>
+          <button
+            class="gpa-btn"
+            type="button"
+            (click)="classificationClick(process, midterm, finalExam)"
+          >
+            Classification
+          </button>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

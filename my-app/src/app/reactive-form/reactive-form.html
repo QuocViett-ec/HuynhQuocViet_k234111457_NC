@@ -1,0 +1,86 @@
+<form [formGroup]="regForm" (ngSubmit)="onSubmit()">
+  <h3 class="text-center">{{ 'Đăng ký khóa học' | uppercase }}</h3>
+
+  <div class="mb-3">
+    <label for="name">Tên:</label>
+    <input
+      type="text"
+      id="name"
+      class="form-control"
+      placeholder="Nhập tên"
+      formControlName="name"
+      [class.is-invalid]="regForm.controls['name'].invalid && regForm.controls['name'].touched"
+    />
+    <div *ngIf="regForm.controls['name'].invalid && regForm.controls['name'].touched">
+      <small *ngIf="regForm.controls['name'].errors?.['required']" class="text-danger"
+        >Tên không được để trống</small
+      >
+      <small *ngIf="regForm.controls['name'].errors?.['minlength']" class="text-danger"
+        >Tên phải tồn tại ít nhất 3 ký tự</small
+      >
+      <small *ngIf="regForm.controls['name'].errors?.['nameNotMatch']" class="text-danger"
+        >Tên không hợp lệ</small
+      >
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="email">Email:</label>
+    <input
+      type="email"
+      id="email"
+      class="form-control"
+      placeholder="Nhập email"
+      formControlName="email"
+      [class.is-invalid]="email?.invalid && email?.touched"
+    />
+    <div *ngIf="email?.invalid && email?.touched">
+      <small *ngIf="email?.errors?.['required']" class="text-danger"
+        >Email không được để trống</small
+      >
+      <small *ngIf="email?.errors?.['email']" class="text-danger">Email không hợp lệ</small>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="password">Password:</label>
+    <input
+      type="password"
+      id="password"
+      class="form-control"
+      placeholder="Nhập password"
+      formControlName="password"
+      [class.is-invalid]="password?.invalid && password?.touched"
+    />
+    <div *ngIf="password?.invalid && password?.touched">
+      <small *ngIf="password?.errors?.['required']" class="text-danger"
+        >Password không được để trống</small
+      >
+      <small *ngIf="password?.errors?.['minlength']" class="text-danger"
+        >Password ít nhất 6 ký tự</small
+      >
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="confirmPass">Confirm password:</label>
+    <input
+      type="password"
+      id="retype_password"
+      class="form-control"
+      placeholder="Nhập lại password"
+      formControlName="confirmPass"
+      [class.is-invalid]="regForm.errors?.['misMatch'] && regForm.controls['confirmPass'].touched"
+    />
+    <small class="text-danger" *ngIf="regForm.errors?.['misMatch']"
+      >Mật khẩu không trùng khớp</small
+    >
+  </div>
+
+  <div class="mb-3 text-end">
+    <button class="btn btn-primary" type="submit">Đăng ký</button>
+    <button class="btn btn-secondary ms-2" type="button" (click)="setDefaultValues()">
+      Default values
+    </button>
+  </div>
+</form>

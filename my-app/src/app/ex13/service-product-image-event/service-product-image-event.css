@@ -1,0 +1,14 @@
+table {
+  border-collapse: collapse;
+}
+
+td {
+  padding: 8px 10px;
+  vertical-align: middle;
+}
+
+img {
+  width: 110px;
+  height: auto;
+  display: block;
+}
