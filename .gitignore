@@ -26,6 +26,7 @@ Thumbs.db
 # Only push these folders from this workspace repo
 /Ex3/
 /midterm/
+/midterm
 /OnClass.code-workspace
 
 # If you later generate these locally, don't push
