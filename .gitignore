@@ -1,0 +1,36 @@
+# Node / npm
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Angular
+.angular/
+dist/
+out-tsc/
+coverage/
+
+# Build artifacts
+*.log
+*.tsbuildinfo
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Env files
+.env
+.env.*
+
+# Only push these folders from this workspace repo
+/Ex3/
+/midterm/
+/OnClass.code-workspace
+
+# If you later generate these locally, don't push
+**/.angular/
+**/dist/
+**/out-tsc/
+**/coverage/
+**/node_modules/
