@@ -141,7 +141,7 @@ export class Ex50Bookdetail implements OnInit {
 
   getImageUrl(): string {
     if (!this.book.Image) return '';
-    return `assets/images/${this.book.Image}`;
+    return `ex50-images/${this.book.Image}`;
   }
 
   formatDate(date: Date | string): string {
