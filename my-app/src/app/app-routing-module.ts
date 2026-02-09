@@ -20,8 +20,12 @@ import { Ex26 } from './ex26/ex26';
 import { Ex27 } from './ex27/ex27';
 import { Ex28 } from './ex28/ex28';
 import { Books } from './books/books';
+import { Bookdetail } from './bookdetail/bookdetail';
+import { Ex50 } from './ex50/ex50';
+import { Ex50Bookdetail } from './ex50/ex50-bookdetail/ex50-bookdetail';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/ex50', pathMatch: 'full' },
   { path: 'ABOUT', component: About },
   { path: 'EX10', component: Ex10 },
   { path: 'form', component: Form },
@@ -43,6 +47,11 @@ const routes: Routes = [
   { path: 'list-customers-http-service', component: ListCustomerHttpService },
   { path: 'list-customers-http-service/:id', component: CustomerDetail },
   { path: 'ex39', component: Books },
+  { path: 'ex41', component: Bookdetail },
+  { path: 'ex41/:id', component: Bookdetail },
+  { path: 'ex50', component: Ex50 },
+  { path: 'ex50-create', component: Ex50Bookdetail },
+  { path: 'ex50/:id', component: Ex50Bookdetail },
   //{ path: '**', component: PageNotFound },
 ];
 

@@ -1,0 +1,29 @@
+<div style="padding: 20px; border: 2px solid #000; max-width: 600px">
+  <div style="margin-bottom: 20px">
+    <label style="font-weight: bold">Book Id: </label>
+    <input
+      type="text"
+      [(ngModel)]="bookId"
+      style="padding: 5px; width: 300px; margin-right: 10px"
+      placeholder="Enter Book Id (e.g., b5)"
+    />
+    <button (click)="searchBook()" style="padding: 5px 20px; cursor: pointer">Search</button>
+  </div>
+
+  <div *ngIf="errMessage" style="color: red; margin-bottom: 10px">
+    {{ errMessage }}
+  </div>
+
+  <div *ngIf="book">
+    <div style="margin-bottom: 10px"><strong>Book Id:</strong> {{ book.BookId }}</div>
+    <div style="margin-bottom: 10px"><strong>Book Name:</strong> {{ book.BookName }}</div>
+    <div style="margin-bottom: 15px"><strong>Price:</strong> {{ book.Price }}</div>
+    <div>
+      <img
+        [src]="'http://localhost:3000/static/img/' + book.Image"
+        style="max-width: 300px; height: auto"
+        [alt]="book.BookName"
+      />
+    </div>
+  </div>
+</div>

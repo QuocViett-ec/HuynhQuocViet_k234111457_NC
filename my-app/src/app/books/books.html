@@ -1,24 +1,31 @@
-<p>books works!</p>
-{{ errMessage }}
-<table border="1">
-  <tr>
-    <td>BookId</td>
-    <td>BookName</td>
-    <td>Price</td>
-    <td>Image</td>
-  </tr>
-  <tbody>
-    <tr *ngFor="let book of books">
-      <td>{{ book.BookId }}</td>
-      <td>{{ book.BookName }}</td>
-      <td>{{ book.Price }}</td>
-      <td>
-        <img
-          src="http://localhost:3000/static/images/{{ book.Image }}"
-          width="50px"
-          height="50px"
-        />
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div style="padding: 20px">
+  <h2>Danh sách sách</h2>
+  <div *ngIf="errMessage" style="color: red">{{ errMessage }}</div>
+  <table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; width: 100%">
+    <thead>
+      <tr style="background-color: #f0f0f0">
+        <th>BookId</th>
+        <th>BookName</th>
+        <th>Price</th>
+        <th>Image</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+        <td>{{ book.BookId }}</td>
+        <td>{{ book.BookName }}</td>
+        <td>{{ book.Price }}</td>
+        <td>
+          <img
+            [src]="'http://localhost:3000/static/img/' + book.Image"
+            width="100px"
+            height="120px"
+            style="object-fit: cover; cursor: pointer"
+            (click)="viewDetail(book.BookId)"
+            [title]="'Click to view details of ' + book.BookName"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

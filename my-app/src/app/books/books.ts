@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { BookApiService } from '../my-service/book-api-service';
+import { Router } from '@angular/router';
+import { BookAPIService } from '../my-service/book-api-service';
 import { IBook } from '../classes/ibook';
 
 @Component({
@@ -11,7 +12,11 @@ import { IBook } from '../classes/ibook';
 export class Books {
   books: IBook[] = [];
   errMessage: string = '';
-  constructor(private _service: BookApiService) {
+
+  constructor(
+    private _service: BookAPIService,
+    private router: Router,
+  ) {
     this._service.getBooks().subscribe({
       next: (data) => {
         this.books = data;
@@ -20,5 +25,9 @@ export class Books {
         this.errMessage = err;
       },
     });
+  }
+
+  viewDetail(bookId: string) {
+    this.router.navigate(['/ex41', bookId]);
   }
 }

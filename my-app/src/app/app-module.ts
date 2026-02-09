@@ -40,6 +40,9 @@ import { Ex26 } from './ex26/ex26';
 import { Ex27 } from './ex27/ex27';
 import { Ex28 } from './ex28/ex28';
 import { Books } from './books/books';
+import { Bookdetail } from './bookdetail/bookdetail';
+import { Ex50 } from './ex50/ex50';
+import { Ex50Bookdetail } from './ex50/ex50-bookdetail/ex50-bookdetail';
 
 @NgModule({
   declarations: [
@@ -77,6 +80,9 @@ import { Books } from './books/books';
     Ex27,
     Ex28,
     Books,
+    Bookdetail,
+    Ex50,
+    Ex50Bookdetail,
   ],
   imports: [
     BrowserModule,
