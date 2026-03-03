@@ -1,0 +1,35 @@
+<div class="container mt-4">
+  <div class="card" style="width: 18rem">
+    <div class="card-header">Login System</div>
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <div class="mb-3">
+          <label for="username" class="form-label">User Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            name="username"
+            [(ngModel)]="username"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            [(ngModel)]="password"
+            required
+          />
+        </div>
+        <div *ngIf="errorMessage" class="alert alert-danger py-1">{{ errorMessage }}</div>
+        <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+          {{ isLoading ? 'Logging in...' : 'Login' }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

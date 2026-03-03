@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { Loggin } from './loggin/loggin';
 import { Ex10 } from './ex10/ex10';
 import { About } from './about/about';
 import { ListProduct1 } from './list-product-1/list-product-1';
@@ -23,9 +24,11 @@ import { Books } from './books/books';
 import { Bookdetail } from './bookdetail/bookdetail';
 import { Ex50 } from './ex50/ex50';
 import { Ex50Bookdetail } from './ex50/ex50-bookdetail/ex50-bookdetail';
+import { Fashion } from './fashion/fashion';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/ex50', pathMatch: 'full' },
+  { path: '', redirectTo: '/loggin', pathMatch: 'full' },
+  { path: 'loggin', component: Loggin },
   { path: 'ABOUT', component: About },
   { path: 'EX10', component: Ex10 },
   { path: 'form', component: Form },
@@ -52,6 +55,7 @@ const routes: Routes = [
   { path: 'ex50', component: Ex50 },
   { path: 'ex50-create', component: Ex50Bookdetail },
   { path: 'ex50/:id', component: Ex50Bookdetail },
+  { path: 'ex53', component: Fashion },
   //{ path: '**', component: PageNotFound },
 ];
 

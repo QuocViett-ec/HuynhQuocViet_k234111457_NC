@@ -1,4 +1,58 @@
-<head>
-  <title>hqv-ex50</title>
-</head>
+<div id="container" *ngIf="!isLoginPage">
+  <ul>
+    <li><a href="#">HOME</a></li>
+    <li>
+      <a href="#">PRODUCTS</a>
+      <ul>
+        <li><a routerLink="san-pham1">Product 1</a></li>
+        <li><a routerLink="san-pham2">Product 2</a></li>
+        <li><a routerLink="san-pham3">Product 3</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">CUSTOMERS</a>
+      <ul>
+        <li><a routerLink="/list-customer">Customer List</a></li>
+        <li><a routerLink="/list-customer-service">Customer List - Service</a></li>
+        <li><a routerLink="/list-customer-http">Customer List - HTTP Service</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">BAI TAP VE NHA</a>
+      <ul>
+        <li><a routerLink="/fake-product">EX26</a></li>
+        <li><a routerLink="/"></a></li>
+        <li><a routerLink="/"></a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">EXTERNAL API</a>
+      <ul>
+        <li><a routerLink="/fake-product">EX26</a></li>
+        <li><a routerLink="/form">FORM - DANG KY KHOA HOC</a></li>
+        <li><a routerLink="/"></a></li>
+      </ul>
+    </li>
+
+    <li>
+      <a href="#">INTERNAL API</a>
+      <ul>
+        <li><a routerLink="/ex39">EX39</a></li>
+        <li><a routerLink="/ex41">EX41</a></li>
+        <li><a routerLink="/ex43">EX43</a></li>
+        <li><a routerLink="/ex45">EX45</a></li>
+        <li><a routerLink="/ex47">EX47</a></li>
+        <li><a routerLink="/ex50">EX50</a></li>
+      </ul>
+    </li>
+
+    <li>
+      <a href="#">MongoDB - REST API</a>
+      <ul>
+        <li><a routerLink="/ex53">EX53</a></li>
+      </ul>
+    </li>
+    <li><a routerLink="/gioi-thieu">About</a></li>
+  </ul>
+</div>
 <router-outlet></router-outlet>
