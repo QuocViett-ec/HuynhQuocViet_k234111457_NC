@@ -1,0 +1,51 @@
+<div class="momo-container">
+  <div class="momo-card">
+    <!-- Header -->
+    <div class="momo-header">
+      <img src="assets/momo/momo.webp" alt="MoMo" class="momo-logo" />
+      <h2>Thanh Toán MoMo</h2>
+    </div>
+
+    <!-- Form -->
+    <div class="momo-form">
+      <!-- Số tiền -->
+      <div class="form-group">
+        <label for="amount">Số tiền (VNĐ)</label>
+        <input
+          id="amount"
+          type="number"
+          [(ngModel)]="amount"
+          min="1000"
+          step="1000"
+          placeholder="Nhập số tiền..."
+          class="form-control"
+        />
+        <small class="hint">Tối thiểu 1,000 VNĐ</small>
+      </div>
+
+      <!-- Nội dung đơn hàng -->
+      <div class="form-group">
+        <label for="orderInfo">Nội dung thanh toán</label>
+        <input
+          id="orderInfo"
+          type="text"
+          [(ngModel)]="orderInfo"
+          placeholder="Nhập nội dung..."
+          class="form-control"
+        />
+      </div>
+
+      <!-- Thông báo lỗi -->
+      <div *ngIf="errMessage" class="alert alert-error">{{ errMessage }}</div>
+
+      <!-- Thông báo thành công -->
+      <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+
+      <!-- Nút thanh toán -->
+      <button class="momo-btn" (click)="onPayment()" [disabled]="loading">
+        <span *ngIf="!loading">Thanh Toán Với MoMo</span>
+        <span *ngIf="loading">Đang xử lý...</span>
+      </button>
+    </div>
+  </div>
+</div>

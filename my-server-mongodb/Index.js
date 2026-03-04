@@ -354,3 +354,159 @@ app.get("/clear-cookie", cors(), (req, res) => {
   res.clearCookie("account");
   res.send("[account] Cookie is removed");
 });
+
+// ============================================================
+// MOMO PAYMENT INTEGRATION (Sandbox - Test Environment)
+// Sinh vien: Huynh Quoc Viet - K234111457
+// Endpoint: https://test-payment.momo.vn/v2/gateway/api/create
+// ============================================================
+const crypto = require("crypto");
+const https = require("https");
+
+const MOMO_CONFIG = {
+  partnerCode: "MOMO",
+  accessKey: "F8BBA842ECF85",
+  secretKey: "K951B6PE1waDMi640xX08PD3vg6EkVlz",
+  hostname: "test-payment.momo.vn",
+  path: "/v2/gateway/api/create",
+  requestType: "payWithMethod",
+  redirectUrl: "http://localhost:4200/momo-result",
+  ipnUrl: "http://localhost:3002/momo/ipn",
+};
+
+// Tạo chữ ký HMAC SHA256
+function createMomoSignature(rawSignature) {
+  return crypto
+    .createHmac("sha256", MOMO_CONFIG.secretKey)
+    .update(rawSignature)
+    .digest("hex");
+}
+
+// POST /momo/create-payment — Tạo yêu cầu thanh toán MoMo
+app.post("/momo/create-payment", cors(), async (req, res) => {
+  try {
+    const { amount, orderInfo, orderId } = req.body;
+    if (!amount || !orderInfo || !orderId) {
+      return res
+        .status(400)
+        .json({ error: "Thiếu amount, orderInfo hoặc orderId" });
+    }
+
+    const requestId = MOMO_CONFIG.partnerCode + new Date().getTime();
+    const extraData = "";
+
+    // Tạo rawSignature ĐÚNG THỨ TỰ alphabetical
+    const rawSignature =
+      "accessKey=" +
+      MOMO_CONFIG.accessKey +
+      "&amount=" +
+      amount +
+      "&extraData=" +
+      extraData +
+      "&ipnUrl=" +
+      MOMO_CONFIG.ipnUrl +
+      "&orderId=" +
+      orderId +
+      "&orderInfo=" +
+      orderInfo +
+      "&partnerCode=" +
+      MOMO_CONFIG.partnerCode +
+      "&redirectUrl=" +
+      MOMO_CONFIG.redirectUrl +
+      "&requestId=" +
+      requestId +
+      "&requestType=" +
+      MOMO_CONFIG.requestType;
+
+    const signature = createMomoSignature(rawSignature);
+
+    const requestBody = JSON.stringify({
+      partnerCode: MOMO_CONFIG.partnerCode,
+      partnerName: "MoMo Payment Test",
+      storeId: "MomoTestStore",
+      accessKey: MOMO_CONFIG.accessKey,
+      requestId: requestId,
+      amount: String(amount),
+      orderId: orderId,
+      orderInfo: orderInfo,
+      redirectUrl: MOMO_CONFIG.redirectUrl,
+      ipnUrl: MOMO_CONFIG.ipnUrl,
+      extraData: extraData,
+      requestType: MOMO_CONFIG.requestType,
+      autoCapture: true,
+      orderGroupId: "",
+      signature: signature,
+      lang: "vi",
+    });
+
+    console.log("[MoMo] rawSignature:", rawSignature);
+    console.log("[MoMo] signature:", signature);
+    console.log("[MoMo] requestBody:", requestBody);
+
+    const options = {
+      hostname: MOMO_CONFIG.hostname,
+      port: 443,
+      path: MOMO_CONFIG.path,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Content-Length": Buffer.byteLength(requestBody),
+      },
+    };
+
+    const momoReq = https.request(options, (momoRes) => {
+      let data = "";
+      momoRes.setEncoding("utf8");
+      momoRes.on("data", (chunk) => {
+        data += chunk;
+      });
+      momoRes.on("end", () => {
+        console.log("[MoMo] Response:", data);
+        const parsed = JSON.parse(data);
+        res.json({
+          resultCode: parsed.resultCode,
+          message: parsed.message,
+          payUrl: parsed.payUrl,
+          orderId: parsed.orderId,
+          requestId: parsed.requestId,
+        });
+      });
+    });
+
+    momoReq.on("error", (e) => {
+      console.error("[MoMo] Request error:", e.message);
+      res.status(500).json({ error: e.message });
+    });
+
+    momoReq.write(requestBody);
+    momoReq.end();
+  } catch (err) {
+    console.error("[MoMo] Error:", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST /momo/ipn — Nhận callback server-to-server từ MoMo (IPN)
+app.post("/momo/ipn", cors(), (req, res) => {
+  console.log("[MoMo IPN] Received callback:", req.body);
+  const { orderId, resultCode, amount, message, signature } = req.body;
+  console.log(
+    `[MoMo IPN] orderId: ${orderId} | resultCode: ${resultCode} | amount: ${amount} | message: ${message}`,
+  );
+  // Trả 204 để MoMo biết đã nhận thành công
+  res.status(204).send();
+});
+
+// GET /momo/return — Nhận query params sau khi redirect từ MoMo
+app.get("/momo/return", cors(), (req, res) => {
+  const { resultCode, orderId, amount, message, orderInfo } = req.query;
+  console.log("[MoMo Return]", req.query);
+  res.json({
+    resultCode: Number(resultCode),
+    orderId,
+    amount,
+    message,
+    orderInfo,
+    success: resultCode === "0",
+  });
+});

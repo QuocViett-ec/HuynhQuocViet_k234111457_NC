@@ -25,6 +25,7 @@ import { Bookdetail } from './bookdetail/bookdetail';
 import { Ex50 } from './ex50/ex50';
 import { Ex50Bookdetail } from './ex50/ex50-bookdetail/ex50-bookdetail';
 import { Fashion } from './fashion/fashion';
+import { MomoPayment } from './momo-payment/momo-payment';
 
 const routes: Routes = [
   { path: '', redirectTo: '/loggin', pathMatch: 'full' },
@@ -56,6 +57,7 @@ const routes: Routes = [
   { path: 'ex50-create', component: Ex50Bookdetail },
   { path: 'ex50/:id', component: Ex50Bookdetail },
   { path: 'ex53', component: Fashion },
+  { path: 'momo', component: MomoPayment },
   //{ path: '**', component: PageNotFound },
 ];
 

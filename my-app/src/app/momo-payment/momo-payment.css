@@ -1,0 +1,182 @@
+.momo-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 80vh;
+  padding: 40px 16px;
+  background: #f5f5f5;
+}
+
+.momo-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  padding: 32px;
+  width: 100%;
+  max-width: 560px;
+}
+
+/* Header */
+.momo-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.momo-logo {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin: 0 auto 14px;
+  display: block;
+}
+
+.momo-header h2 {
+  margin: 0 0 6px;
+  font-size: 24px;
+  color: #ae0554;
+  font-weight: 700;
+}
+
+.momo-subtitle {
+  font-size: 12px;
+  color: #888;
+  margin: 0;
+}
+
+/* Form */
+.momo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+}
+
+.form-control {
+  padding: 10px 14px;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.form-control:focus {
+  border-color: #ae0554;
+}
+
+.hint {
+  font-size: 11px;
+  color: #aaa;
+}
+
+/* Alerts */
+.alert {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.alert-error {
+  background: #fff0f3;
+  color: #c0392b;
+  border: 1px solid #f5c2cb;
+}
+
+.alert-success {
+  background: #f0fff4;
+  color: #27ae60;
+  border: 1px solid #b2dfdb;
+}
+
+/* Button */
+.momo-btn {
+  background: #ae0554;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    transform 0.1s;
+  letter-spacing: 0.5px;
+}
+
+.momo-btn:hover:not(:disabled) {
+  background: #8a0340;
+  transform: translateY(-1px);
+}
+
+.momo-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Info table */
+.momo-info {
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.momo-info h3 {
+  margin: 0 0 14px;
+  font-size: 15px;
+  color: #333;
+}
+
+.momo-info table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.momo-info th,
+.momo-info td {
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.momo-info th {
+  background: #f0f0f0;
+  font-weight: 600;
+  color: #555;
+}
+
+.momo-info code {
+  background: #eee;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.momo-info .success {
+  color: #27ae60;
+}
+
+.momo-info .error {
+  color: #c0392b;
+}
+
+.otp-note {
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: #555;
+}
