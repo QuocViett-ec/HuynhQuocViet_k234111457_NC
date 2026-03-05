@@ -90,5 +90,13 @@
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"
+  },
+  {
+    "context": ["/ex63"],
+    "target": "http://localhost:3002",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "cookieDomainRewrite": "localhost"
   }
 ]

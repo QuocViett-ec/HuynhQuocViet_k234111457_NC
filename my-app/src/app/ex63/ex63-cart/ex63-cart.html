@@ -1,0 +1,91 @@
+<div class="cart-container">
+  <!-- Header -->
+  <div class="cart-header">
+    <button class="btn-back" (click)="goShopping()">Tiếp tục mua sắm</button>
+    <h1>Giỏ Hàng Của Bạn</h1>
+    <span class="item-count">{{ cartItems.length }} sản phẩm</span>
+  </div>
+
+  <!-- Messages -->
+  <div class="alert alert-success" *ngIf="successMessage">{{ successMessage }}</div>
+  <div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <!-- Loading -->
+  <div class="loading" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Đang tải giỏ hàng...</p>
+  </div>
+
+  <!-- Empty Cart -->
+  <div class="empty-cart" *ngIf="!loading && cartItems.length === 0 && !successMessage">
+    <h3>Giỏ hàng của bạn đang trống</h3>
+    <p>Hãy thêm sản phẩm vào giỏ hàng!</p>
+    <button class="btn-shop" (click)="goShopping()">Mua sắm ngay</button>
+  </div>
+
+  <!-- Cart Items -->
+  <div class="cart-content" *ngIf="!loading && cartItems.length > 0">
+    <div class="cart-items">
+      <div class="cart-item" *ngFor="let item of cartItems">
+        <img [src]="item.image" [alt]="item.name" class="item-img" />
+        <div class="item-info">
+          <h4 class="item-name">{{ item.name }}</h4>
+          <span class="item-category">{{ item.category }}</span>
+          <p class="item-price">{{ formatPrice(item.price) }}</p>
+        </div>
+        <div class="item-qty">
+          <button class="qty-btn" (click)="updateQuantity(item, item.quantity - 1)">−</button>
+          <span class="qty-value">{{ item.quantity }}</span>
+          <button class="qty-btn" (click)="updateQuantity(item, item.quantity + 1)">+</button>
+        </div>
+        <div class="item-subtotal">{{ formatPrice(item.price * item.quantity) }}</div>
+        <button class="btn-remove" (click)="removeItem(item)" title="Xóa">x</button>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="cart-summary">
+      <h3>Tóm tắt đơn hàng</h3>
+      <div class="summary-row">
+        <span>Số lượng sản phẩm:</span>
+        <span>{{ cartItems.length }}</span>
+      </div>
+      <div class="summary-row total-row">
+        <span>Tổng cộng:</span>
+        <span class="total-price">{{ formatPrice(total) }}</span>
+      </div>
+
+      <div class="summary-actions">
+        <button class="btn-clear" (click)="clearCart()">Xóa giỏ hàng</button>
+        <button class="btn-checkout" (click)="toggleCheckout()">
+          {{ showCheckoutForm ? 'Hủy' : 'Đặt hàng' }}
+        </button>
+      </div>
+
+      <!-- Checkout Form -->
+      <div class="checkout-form" *ngIf="showCheckoutForm">
+        <h4>Thông tin giao hàng</h4>
+        <div class="form-group">
+          <label>Họ tên <span class="required">*</span></label>
+          <input type="text" [(ngModel)]="checkoutForm.customerName" placeholder="Nguyễn Văn A" />
+        </div>
+        <div class="form-group">
+          <label>Số điện thoại <span class="required">*</span></label>
+          <input type="tel" [(ngModel)]="checkoutForm.customerPhone" placeholder="0912345678" />
+        </div>
+        <div class="form-group">
+          <label>Địa chỉ giao hàng</label>
+          <textarea
+            [(ngModel)]="checkoutForm.customerAddress"
+            placeholder="123 Đường ABC, Quận 1, TP.HCM"
+            rows="3"
+          ></textarea>
+        </div>
+        <button class="btn-confirm" (click)="submitOrder()" [disabled]="checkingOut">
+          <span *ngIf="!checkingOut">Xác nhận đặt hàng ({{ formatPrice(total) }})</span>
+          <span *ngIf="checkingOut">Đang xử lý...</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

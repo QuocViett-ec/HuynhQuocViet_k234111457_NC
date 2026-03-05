@@ -6,7 +6,7 @@ app.use(morgan("combined"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const cors = require("cors");
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
 app.listen(port, () => {
   console.log(`My Server listening on port ${port}`);
 });
@@ -509,4 +509,234 @@ app.get("/momo/return", cors(), (req, res) => {
     orderInfo,
     success: resultCode === "0",
   });
+});
+var session = require("express-session");
+app.use(
+  session({
+    secret: "Shh, its a secret!",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60 * 60 * 1000 }, // 1 hour
+  }),
+);
+
+app.get("/contact", cors(), (req, res) => {
+  if (req.session.visited != null) {
+    req.session.visited++;
+    res.send("You visited this page " + req.session.visited + " times");
+  } else {
+    req.session.visited = 1;
+    res.send("Welcome to this page for the first time!");
+  }
+});
+
+// ============================================================
+// EX63 - SHOPPING CART WITH SESSION
+// ============================================================
+
+// Product collection setup
+const ex63Db = client.db("Ex63");
+const productCollection = ex63Db.collection("Product");
+const orderCollection = ex63Db.collection("Order");
+
+// Seed sample products
+async function initSampleProducts() {
+  await productCollection.deleteMany({});
+  await productCollection.insertMany([
+    {
+      name: "Áo Thun Nam Basic",
+      price: 150000,
+      category: "Áo",
+      stock: 100,
+      image: "assets/ex63/ao-thun.jpg",
+      description: "Áo thun nam chất liệu cotton 100%, mềm mại, thoáng mát.",
+    },
+    {
+      name: "Quần Jean Nam Slim Fit",
+      price: 450000,
+      category: "Quần",
+      stock: 50,
+      image: "assets/ex63/quan-jean.jpg",
+      description: "Quần jean slim fit thời trang, co giãn tốt.",
+    },
+    {
+      name: "Giày Sneaker Trắng",
+      price: 850000,
+      category: "Giày",
+      stock: 30,
+      image: "assets/ex63/sneaker-trang.jpg",
+      description: "Giày sneaker trắng phong cách, đế êm, bền chắc.",
+    },
+    {
+      name: "Túi Xách Nữ Da PU",
+      price: 320000,
+      category: "Phụ kiện",
+      stock: 40,
+      image: "assets/ex63/tui-xach.webp",
+      description: "Túi xách nữ da PU cao cấp, nhiều ngăn tiện dụng.",
+    },
+    {
+      name: "Áo Khoác Denim Unisex",
+      price: 620000,
+      category: "Áo",
+      stock: 25,
+      image: "assets/ex63/ao-khoac.jpg",
+      description: "Áo khoác denim unisex phong cách Hàn Quốc.",
+    },
+    {
+      name: "Mũ Lưỡi Trai Snapback",
+      price: 180000,
+      category: "Phụ kiện",
+      stock: 60,
+      image: "assets/ex63/non-luoi-trai.jpg",
+      description: "Mũ lưỡi trai snapback thời trang, nhiều màu sắc.",
+    },
+  ]);
+  console.log("Ex63: Sample products seeded.");
+}
+initSampleProducts();
+
+// GET /ex63/products - Lấy tất cả sản phẩm
+app.get("/ex63/products", async (req, res) => {
+  try {
+    const products = await productCollection.find({}).toArray();
+    res.json(products);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /ex63/products/:id - Lấy 1 sản phẩm theo id
+app.get("/ex63/products/:id", async (req, res) => {
+  try {
+    const product = await productCollection.findOne({
+      _id: new ObjectId(req.params.id),
+    });
+    if (!product) return res.status(404).json({ error: "Product not found" });
+    res.json(product);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /ex63/cart - Lấy giỏ hàng từ Session
+app.get("/ex63/cart", (req, res) => {
+  const cart = req.session.cart || [];
+  res.json({ cart, total: cart.reduce((s, i) => s + i.price * i.quantity, 0) });
+});
+
+// POST /ex63/cart/add - Thêm sản phẩm vào giỏ hàng (Session)
+app.post("/ex63/cart/add", async (req, res) => {
+  try {
+    const { productId, quantity } = req.body;
+    if (!productId) return res.status(400).json({ error: "Thiếu productId" });
+
+    const qty = parseInt(quantity) || 1;
+    const product = await productCollection.findOne({
+      _id: new ObjectId(productId),
+    });
+    if (!product) return res.status(404).json({ error: "Product not found" });
+
+    if (!req.session.cart) req.session.cart = [];
+
+    const idx = req.session.cart.findIndex(
+      (item) => item.productId === productId,
+    );
+    if (idx >= 0) {
+      req.session.cart[idx].quantity += qty;
+    } else {
+      req.session.cart.push({
+        productId,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        category: product.category,
+        quantity: qty,
+      });
+    }
+
+    res.json({
+      message: "Đã thêm vào giỏ hàng",
+      cart: req.session.cart,
+      total: req.session.cart.reduce((s, i) => s + i.price * i.quantity, 0),
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// PUT /ex63/cart/update - Cập nhật số lượng sản phẩm trong giỏ
+app.put("/ex63/cart/update", (req, res) => {
+  const { productId, quantity } = req.body;
+  if (!req.session.cart)
+    return res.status(400).json({ error: "Giỏ hàng trống" });
+
+  const idx = req.session.cart.findIndex((i) => i.productId === productId);
+  if (idx < 0)
+    return res.status(404).json({ error: "Sản phẩm không có trong giỏ" });
+
+  const qty = parseInt(quantity);
+  if (qty <= 0) {
+    req.session.cart.splice(idx, 1);
+  } else {
+    req.session.cart[idx].quantity = qty;
+  }
+
+  res.json({
+    message: "Đã cập nhật giỏ hàng",
+    cart: req.session.cart,
+    total: req.session.cart.reduce((s, i) => s + i.price * i.quantity, 0),
+  });
+});
+
+// DELETE /ex63/cart/remove/:productId - Xóa 1 sản phẩm khỏi giỏ
+app.delete("/ex63/cart/remove/:productId", (req, res) => {
+  if (!req.session.cart) return res.json({ cart: [], total: 0 });
+  req.session.cart = req.session.cart.filter(
+    (i) => i.productId !== req.params.productId,
+  );
+  res.json({
+    message: "Đã xóa khỏi giỏ hàng",
+    cart: req.session.cart,
+    total: req.session.cart.reduce((s, i) => s + i.price * i.quantity, 0),
+  });
+});
+
+// DELETE /ex63/cart/clear - Xóa toàn bộ giỏ hàng
+app.delete("/ex63/cart/clear", (req, res) => {
+  req.session.cart = [];
+  res.json({ message: "Đã xóa toàn bộ giỏ hàng", cart: [], total: 0 });
+});
+
+// POST /ex63/cart/checkout - Thanh toán / Lưu đơn hàng vào DB
+app.post("/ex63/cart/checkout", async (req, res) => {
+  try {
+    const cart = req.session.cart;
+    if (!cart || cart.length === 0)
+      return res.status(400).json({ error: "Giỏ hàng trống" });
+
+    const { customerName, customerPhone, customerAddress } = req.body;
+    const total = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+
+    const order = {
+      customerName: customerName || "Khách lẻ",
+      customerPhone: customerPhone || "",
+      customerAddress: customerAddress || "",
+      items: [...cart],
+      total,
+      status: "pending",
+      createdAt: new Date(),
+    };
+
+    const result = await orderCollection.insertOne(order);
+    req.session.cart = []; // Xóa giỏ hàng sau khi đặt hàng thành công
+
+    res.status(201).json({
+      message: "Đặt hàng thành công! Đơn hàng đã được lưu vào database.",
+      orderId: result.insertedId,
+      total,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });

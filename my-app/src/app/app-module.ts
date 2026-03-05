@@ -47,6 +47,8 @@ import { BookUpdate } from './book-update/book-update';
 import { Fashion } from './fashion/fashion';
 import { Loggin } from './loggin/loggin';
 import { MomoPayment } from './momo-payment/momo-payment';
+import { Ex63ProductList } from './ex63/ex63-product-list/ex63-product-list';
+import { Ex63CartComponent } from './ex63/ex63-cart/ex63-cart';
 
 @NgModule({
   declarations: [
@@ -91,6 +93,8 @@ import { MomoPayment } from './momo-payment/momo-payment';
     Fashion,
     Loggin,
     MomoPayment,
+    Ex63ProductList,
+    Ex63CartComponent,
   ],
   imports: [
     BrowserModule,
