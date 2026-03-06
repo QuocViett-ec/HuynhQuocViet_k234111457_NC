@@ -57,6 +57,13 @@
     "logLevel": "debug"
   },
   {
+    "context": ["/ex58-fashions"],
+    "target": "http://localhost:3002",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+  {
     "context": ["/login"],
     "target": "http://localhost:3002",
     "secure": false,

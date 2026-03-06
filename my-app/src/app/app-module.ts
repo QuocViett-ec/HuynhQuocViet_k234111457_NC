@@ -49,6 +49,8 @@ import { Loggin } from './loggin/loggin';
 import { MomoPayment } from './momo-payment/momo-payment';
 import { Ex63ProductList } from './ex63/ex63-product-list/ex63-product-list';
 import { Ex63CartComponent } from './ex63/ex63-cart/ex63-cart';
+import { Ex58FashionList } from './ex58/ex58-fashion-list/ex58-fashion-list';
+import { Ex58FashionDetail } from './ex58/ex58-fashion-detail/ex58-fashion-detail';
 
 @NgModule({
   declarations: [
@@ -95,6 +97,8 @@ import { Ex63CartComponent } from './ex63/ex63-cart/ex63-cart';
     MomoPayment,
     Ex63ProductList,
     Ex63CartComponent,
+    Ex58FashionList,
+    Ex58FashionDetail,
   ],
   imports: [
     BrowserModule,

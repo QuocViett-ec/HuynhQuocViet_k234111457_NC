@@ -22,6 +22,126 @@ userCollection = database.collection("User");
 onclassDb = client.db("OnClass");
 logginCollection = onclassDb.collection("Loggin");
 
+// ─── Seed sample Fashion data (3 styles × 3-5 items each) ─────────────────
+async function initSampleFashions() {
+  // If collection has old-format documents (missing fashion_title), wipe and reseed
+  const hasNew = await fashionCollection.findOne({
+    fashion_title: { $exists: true },
+  });
+  if (hasNew) return; // already has correct-format data
+  await fashionCollection.deleteMany({}); // clear legacy data if any
+  const now = new Date();
+  const sample = [
+    // STREET STYLE
+    {
+      fashion_title: "Phil Oh's Best Street Style – Paris Fall 2023",
+      fashion_details:
+        "<p>There are two street style camps in Paris this season—those willing to brave the cold and go coatless, and others bundling up in their warmest furs and scarves. Phil Oh has captured the best of both approaches.</p>",
+      thumbnail:
+        "https://media.vogue.com/photos/64f1a1e2e4b0c3001a1b2c3d/1:1/w_350,h_350,c_limit/street-paris.jpg",
+      fashion_style: "Street Style",
+
+      creation_date: new Date(now - 5 * 86400000),
+    },
+    {
+      fashion_title: "Phil Oh's Best Street Style – Milan Fall 2023",
+      fashion_details:
+        "<p>Milan delivers bold silhouettes and sculptural accessories. Phil Oh roams the cobblestones to capture the city's most daring looks.</p>",
+      thumbnail:
+        "https://media.vogue.com/photos/64f1a1e2e4b0c3001a1b2c3e/1:1/w_350,h_350,c_limit/street-milan.jpg",
+      fashion_style: "Street Style",
+      creation_date: new Date(now - 4 * 86400000),
+    },
+    {
+      fashion_title: "Phil Oh's Best Street Style – London Fall 2023",
+      fashion_details:
+        "<p>London's street style scene mixes classic British tailoring with avant-garde experimentation. Phil Oh is on the ground to document every look.</p>",
+      thumbnail:
+        "https://media.vogue.com/photos/64f1a1e2e4b0c3001a1b2c3f/1:1/w_350,h_350,c_limit/street-london.jpg",
+      fashion_style: "Street Style",
+      creation_date: new Date(now - 3 * 86400000),
+    },
+    {
+      fashion_title: "Vivienne Westwood Is Remembered in London",
+      fashion_details:
+        "<p>Friends and fans of the late designer gather in London to celebrate her iconic legacy and rebellious spirit that changed fashion forever.</p>",
+      thumbnail:
+        "https://media.vogue.com/photos/64f1a1e2e4b0c3001a1b2c40/1:1/w_350,h_350,c_limit/vivienne.jpg",
+      fashion_style: "Street Style",
+      creation_date: new Date(now - 2 * 86400000),
+    },
+    // TRENDS
+    {
+      fashion_title: "Why the Short Suit Should Be Your Next Spring Investment",
+      fashion_details:
+        "<p>The short suit is having a major moment. Lightweight fabrics, relaxed tailoring and bold colours make it the ultimate transitional piece for spring.</p>",
+      thumbnail:
+        "https://media.vogue.com/photos/64f1a1e2e4b0c3001a1b2c41/1:1/w_350,h_350,c_limit/short-suit.jpg",
+      fashion_style: "Trends",
+      creation_date: new Date(now - 6 * 86400000),
+    },
+    {
+      fashion_title:
+        "Is This the Trend of the Future? AI Interprets the Fall 2023 Menswear Season",
+      fashion_details:
+        "<p>Artificial intelligence meets the runway as designers experiment with algorithmic aesthetics and data-driven silhouettes for menswear.</p>",
+      thumbnail:
+        "https://media.vogue.com/photos/64f1a1e2e4b0c3001a1b2c42/1:1/w_350,h_350,c_limit/ai-trend.jpg",
+      fashion_style: "Trends",
+      creation_date: new Date(now - 7 * 86400000),
+    },
+    {
+      fashion_title: "What Street Style Looked Like a Decade Ago",
+      fashion_details:
+        "<p>We look back at the defining street style moments of the early 2010s, from chunky sneakers to maximalist layering that shaped today's looks.</p>",
+      thumbnail:
+        "https://media.vogue.com/photos/64f1a1e2e4b0c3001a1b2c43/1:1/w_350,h_350,c_limit/decade-ago.jpg",
+      fashion_style: "Trends",
+      creation_date: new Date(now - 8 * 86400000),
+    },
+    {
+      fashion_title: "Men, Skirts Aren't That Scary—Promise!",
+      fashion_details:
+        "<p>The gender-fluid fashion movement continues to push boundaries. This season's runways confirm that skirts for men are here to stay—and they look incredible.</p>",
+      thumbnail:
+        "https://media.vogue.com/photos/64f1a1e2e4b0c3001a1b2c44/1:1/w_350,h_350,c_limit/men-skirts.jpg",
+      fashion_style: "Trends",
+      creation_date: new Date(now - 9 * 86400000),
+    },
+    // CASUAL
+    {
+      fashion_title: "Oversized Denim: The Comfort-First Look for Spring",
+      fashion_details:
+        "<p>Baggy jeans, oversized denim jackets, and relaxed denim sets dominate the casual scene. Pair with a simple white tee for an effortlessly cool outfit.</p>",
+      thumbnail:
+        "https://media.vogue.com/photos/64f1a1e2e4b0c3001a1b2c45/1:1/w_350,h_350,c_limit/casual-denim.jpg",
+      fashion_style: "Casual",
+      creation_date: new Date(now - 10 * 86400000),
+    },
+    {
+      fashion_title: "The Everyday Sneaker Edit: Best Picks of 2023",
+      fashion_details:
+        "<p>From classic white kicks to bold chunky soles, these are the sneakers that defined casual dressing in 2023. Comfort has never looked this good.</p>",
+      thumbnail:
+        "https://media.vogue.com/photos/64f1a1e2e4b0c3001a1b2c46/1:1/w_350,h_350,c_limit/casual-sneaker.jpg",
+      fashion_style: "Casual",
+      creation_date: new Date(now - 11 * 86400000),
+    },
+    {
+      fashion_title: "Linen Sets: Your Summer Wardrobe Essential",
+      fashion_details:
+        "<p>Breathable, stylish, and versatile—linen co-ords are the season's must-have for relaxed daywear. Available in earthy neutrals and soft pastels.</p>",
+      thumbnail:
+        "https://media.vogue.com/photos/64f1a1e2e4b0c3001a1b2c47/1:1/w_350,h_350,c_limit/casual-linen.jpg",
+      fashion_style: "Casual",
+      creation_date: new Date(now - 12 * 86400000),
+    },
+  ];
+  await fashionCollection.insertMany(sample);
+  console.log("Sample Fashion data seeded (", sample.length, "items)");
+}
+initSampleFashions();
+
 // Tạo sample Users trong FashionData nếu chưa có
 async function initSampleUsers() {
   const sampleUsers = [
@@ -59,10 +179,25 @@ async function initDefaultUser() {
 }
 initDefaultUser();
 
-// GET all fashions
-app.get("/fashions", cors(), async (req, res) => {
+// GET distinct styles
+app.get("/ex58-fashions/styles", cors(), async (req, res) => {
   try {
-    const result = await fashionCollection.find({}).toArray();
+    const styles = await fashionCollection.distinct("fashion_style");
+    res.json(styles.filter(Boolean).sort());
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET all fashions (sorted by creation_date desc, optional ?style= filter)
+app.get("/ex58-fashions", cors(), async (req, res) => {
+  try {
+    const filter = {};
+    if (req.query.style) filter.fashion_style = req.query.style;
+    const result = await fashionCollection
+      .find(filter)
+      .sort({ creation_date: -1 })
+      .toArray();
     res.json(result);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -70,7 +205,7 @@ app.get("/fashions", cors(), async (req, res) => {
 });
 
 // GET one fashion by id
-app.get("/fashions/:id", cors(), async (req, res) => {
+app.get("/ex58-fashions/:id", cors(), async (req, res) => {
   try {
     const result = await fashionCollection.findOne({
       _id: new ObjectId(req.params.id),
@@ -83,14 +218,20 @@ app.get("/fashions/:id", cors(), async (req, res) => {
 });
 
 // POST create new fashion
-app.post("/fashions", cors(), async (req, res) => {
+app.post("/ex58-fashions", cors(), async (req, res) => {
   try {
-    const { style, fashion_subject, fashion_detail, fashion_image } = req.body;
+    const { fashion_title, fashion_details, thumbnail, fashion_style } =
+      req.body;
+    if (!fashion_title || !fashion_style)
+      return res
+        .status(400)
+        .json({ error: "fashion_title and fashion_style are required" });
     const newFashion = {
-      style,
-      fashion_subject,
-      fashion_detail,
-      fashion_image,
+      fashion_title,
+      fashion_details: fashion_details || "",
+      thumbnail: thumbnail || "",
+      fashion_style,
+      creation_date: new Date(),
     };
     const result = await fashionCollection.insertOne(newFashion);
     res
@@ -102,12 +243,13 @@ app.post("/fashions", cors(), async (req, res) => {
 });
 
 // PUT update fashion by id
-app.put("/fashions/:id", cors(), async (req, res) => {
+app.put("/ex58-fashions/:id", cors(), async (req, res) => {
   try {
-    const { style, fashion_subject, fashion_detail, fashion_image } = req.body;
+    const { fashion_title, fashion_details, thumbnail, fashion_style } =
+      req.body;
     const result = await fashionCollection.updateOne(
       { _id: new ObjectId(req.params.id) },
-      { $set: { style, fashion_subject, fashion_detail, fashion_image } },
+      { $set: { fashion_title, fashion_details, thumbnail, fashion_style } },
     );
     if (result.matchedCount === 0)
       return res.status(404).json({ error: "Not found" });
@@ -118,7 +260,7 @@ app.put("/fashions/:id", cors(), async (req, res) => {
 });
 
 // DELETE fashion by id
-app.delete("/fashions/:id", cors(), async (req, res) => {
+app.delete("/ex58-fashions/:id", cors(), async (req, res) => {
   try {
     const result = await fashionCollection.deleteOne({
       _id: new ObjectId(req.params.id),

@@ -1,0 +1,66 @@
+<div class="fashion-page">
+  <!-- Header -->
+  <div class="page-header">
+    <h1>Fashion Website - EX58</h1>
+    <button class="btn btn-add" (click)="addNew()">+ Thêm Fashion mới</button>
+  </div>
+
+  <!-- Filter bar -->
+  <div class="filter-bar">
+    <div class="filter-group">
+      <label>Lọc theo Style:</label>
+      <select [(ngModel)]="selectedStyle" (change)="onStyleChange()">
+        <option value="">-- Tất cả --</option>
+        <option *ngFor="let s of styles" [value]="s">{{ s }}</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Tìm Style:</label>
+      <input type="text" [(ngModel)]="searchStyle" placeholder="Nhập tên Style..." />
+      <button class="btn btn-search" (click)="onSearchStyle()">Tìm</button>
+    </div>
+    <button class="btn btn-clear" (click)="clearFilter()">Xóa lọc</button>
+  </div>
+
+  <!-- Error -->
+  <div class="alert-error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <!-- Loading -->
+  <div class="loading" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Đang tải dữ liệu...</p>
+  </div>
+
+  <!-- Content: grouped by style -->
+  <div *ngIf="!loading">
+    <div *ngIf="groupedFashions.length === 0" class="empty-state">
+      <p>Không có fashion nào.</p>
+    </div>
+
+    <div class="style-group" *ngFor="let group of groupedFashions">
+      <h2 class="style-title">{{ group.style }}</h2>
+      <div class="fashion-grid">
+        <div class="fashion-card" *ngFor="let f of group.items">
+          <div class="card-thumb" (click)="viewDetail(f._id!)">
+            <img
+              [src]="f.thumbnail || 'https://via.placeholder.com/300x400?text=No+Image'"
+              [alt]="f.fashion_title"
+            />
+            <span class="style-badge">{{ f.fashion_style }}</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title" (click)="viewDetail(f._id!)">{{ f.fashion_title }}</h3>
+            <p class="card-date">{{ formatDate(f.creation_date) }}</p>
+            <div class="card-actions">
+              <button class="btn btn-view" (click)="viewDetail(f._id!)">Xem</button>
+              <button class="btn btn-edit" (click)="editFashion(f._id!)">Sửa</button>
+              <button class="btn btn-delete" (click)="deleteFashion(f._id!, f.fashion_title)">
+                Xóa
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

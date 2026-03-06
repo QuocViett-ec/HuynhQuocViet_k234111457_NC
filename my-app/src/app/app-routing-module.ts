@@ -28,6 +28,8 @@ import { Fashion } from './fashion/fashion';
 import { MomoPayment } from './momo-payment/momo-payment';
 import { Ex63ProductList } from './ex63/ex63-product-list/ex63-product-list';
 import { Ex63CartComponent } from './ex63/ex63-cart/ex63-cart';
+import { Ex58FashionList } from './ex58/ex58-fashion-list/ex58-fashion-list';
+import { Ex58FashionDetail } from './ex58/ex58-fashion-detail/ex58-fashion-detail';
 
 const routes: Routes = [
   { path: '', redirectTo: '/loggin', pathMatch: 'full' },
@@ -62,6 +64,10 @@ const routes: Routes = [
   { path: 'momo', component: MomoPayment },
   { path: 'ex63', component: Ex63ProductList },
   { path: 'ex63-cart', component: Ex63CartComponent },
+  { path: 'ex58', component: Ex58FashionList },
+  { path: 'ex58-detail/:id', component: Ex58FashionDetail },
+  { path: 'ex58-edit/:id', component: Ex58FashionDetail },
+  { path: 'ex58-create', component: Ex58FashionDetail },
   //{ path: '**', component: PageNotFound },
 ];
 
