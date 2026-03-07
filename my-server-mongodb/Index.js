@@ -38,7 +38,7 @@ async function initSampleFashions() {
       fashion_details:
         "<p>There are two street style camps in Paris this season—those willing to brave the cold and go coatless, and others bundling up in their warmest furs and scarves. Phil Oh has captured the best of both approaches.</p>",
       thumbnail:
-        "https://media.vogue.com/photos/64f1a1e2e4b0c3001a1b2c3d/1:1/w_350,h_350,c_limit/street-paris.jpg",
+        "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=400&h=500&fit=crop&auto=format",
       fashion_style: "Street Style",
 
       creation_date: new Date(now - 5 * 86400000),
@@ -48,7 +48,7 @@ async function initSampleFashions() {
       fashion_details:
         "<p>Milan delivers bold silhouettes and sculptural accessories. Phil Oh roams the cobblestones to capture the city's most daring looks.</p>",
       thumbnail:
-        "https://media.vogue.com/photos/64f1a1e2e4b0c3001a1b2c3e/1:1/w_350,h_350,c_limit/street-milan.jpg",
+        "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&h=500&fit=crop&auto=format",
       fashion_style: "Street Style",
       creation_date: new Date(now - 4 * 86400000),
     },
@@ -57,7 +57,7 @@ async function initSampleFashions() {
       fashion_details:
         "<p>London's street style scene mixes classic British tailoring with avant-garde experimentation. Phil Oh is on the ground to document every look.</p>",
       thumbnail:
-        "https://media.vogue.com/photos/64f1a1e2e4b0c3001a1b2c3f/1:1/w_350,h_350,c_limit/street-london.jpg",
+        "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=400&h=500&fit=crop&auto=format",
       fashion_style: "Street Style",
       creation_date: new Date(now - 3 * 86400000),
     },
@@ -66,7 +66,7 @@ async function initSampleFashions() {
       fashion_details:
         "<p>Friends and fans of the late designer gather in London to celebrate her iconic legacy and rebellious spirit that changed fashion forever.</p>",
       thumbnail:
-        "https://media.vogue.com/photos/64f1a1e2e4b0c3001a1b2c40/1:1/w_350,h_350,c_limit/vivienne.jpg",
+        "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400&h=500&fit=crop&auto=format",
       fashion_style: "Street Style",
       creation_date: new Date(now - 2 * 86400000),
     },
@@ -76,7 +76,7 @@ async function initSampleFashions() {
       fashion_details:
         "<p>The short suit is having a major moment. Lightweight fabrics, relaxed tailoring and bold colours make it the ultimate transitional piece for spring.</p>",
       thumbnail:
-        "https://media.vogue.com/photos/64f1a1e2e4b0c3001a1b2c41/1:1/w_350,h_350,c_limit/short-suit.jpg",
+        "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&h=500&fit=crop&auto=format",
       fashion_style: "Trends",
       creation_date: new Date(now - 6 * 86400000),
     },
@@ -86,7 +86,7 @@ async function initSampleFashions() {
       fashion_details:
         "<p>Artificial intelligence meets the runway as designers experiment with algorithmic aesthetics and data-driven silhouettes for menswear.</p>",
       thumbnail:
-        "https://media.vogue.com/photos/64f1a1e2e4b0c3001a1b2c42/1:1/w_350,h_350,c_limit/ai-trend.jpg",
+        "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400&h=500&fit=crop&auto=format",
       fashion_style: "Trends",
       creation_date: new Date(now - 7 * 86400000),
     },
@@ -95,7 +95,7 @@ async function initSampleFashions() {
       fashion_details:
         "<p>We look back at the defining street style moments of the early 2010s, from chunky sneakers to maximalist layering that shaped today's looks.</p>",
       thumbnail:
-        "https://media.vogue.com/photos/64f1a1e2e4b0c3001a1b2c43/1:1/w_350,h_350,c_limit/decade-ago.jpg",
+        "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=500&fit=crop&auto=format",
       fashion_style: "Trends",
       creation_date: new Date(now - 8 * 86400000),
     },
@@ -104,7 +104,7 @@ async function initSampleFashions() {
       fashion_details:
         "<p>The gender-fluid fashion movement continues to push boundaries. This season's runways confirm that skirts for men are here to stay—and they look incredible.</p>",
       thumbnail:
-        "https://media.vogue.com/photos/64f1a1e2e4b0c3001a1b2c44/1:1/w_350,h_350,c_limit/men-skirts.jpg",
+        "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=500&fit=crop&auto=format&hue=45",
       fashion_style: "Trends",
       creation_date: new Date(now - 9 * 86400000),
     },
@@ -114,7 +114,7 @@ async function initSampleFashions() {
       fashion_details:
         "<p>Baggy jeans, oversized denim jackets, and relaxed denim sets dominate the casual scene. Pair with a simple white tee for an effortlessly cool outfit.</p>",
       thumbnail:
-        "https://media.vogue.com/photos/64f1a1e2e4b0c3001a1b2c45/1:1/w_350,h_350,c_limit/casual-denim.jpg",
+        "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=400&h=500&fit=crop&auto=format",
       fashion_style: "Casual",
       creation_date: new Date(now - 10 * 86400000),
     },
@@ -123,7 +123,7 @@ async function initSampleFashions() {
       fashion_details:
         "<p>From classic white kicks to bold chunky soles, these are the sneakers that defined casual dressing in 2023. Comfort has never looked this good.</p>",
       thumbnail:
-        "https://media.vogue.com/photos/64f1a1e2e4b0c3001a1b2c46/1:1/w_350,h_350,c_limit/casual-sneaker.jpg",
+        "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=500&fit=crop&auto=format",
       fashion_style: "Casual",
       creation_date: new Date(now - 11 * 86400000),
     },
@@ -132,7 +132,7 @@ async function initSampleFashions() {
       fashion_details:
         "<p>Breathable, stylish, and versatile—linen co-ords are the season's must-have for relaxed daywear. Available in earthy neutrals and soft pastels.</p>",
       thumbnail:
-        "https://media.vogue.com/photos/64f1a1e2e4b0c3001a1b2c47/1:1/w_350,h_350,c_limit/casual-linen.jpg",
+        "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=400&h=500&fit=crop&auto=format",
       fashion_style: "Casual",
       creation_date: new Date(now - 12 * 86400000),
     },
@@ -141,6 +141,42 @@ async function initSampleFashions() {
   console.log("Sample Fashion data seeded (", sample.length, "items)");
 }
 initSampleFashions();
+
+// ─── Migration: fix broken thumbnail URLs in existing documents ──────────────
+const UNSPLASH_THUMB_MAP = {
+  "Phil Oh's Best Street Style \u2013 Paris Fall 2023": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=400&h=500&fit=crop&auto=format",
+  "Phil Oh's Best Street Style \u2013 Milan Fall 2023": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&h=500&fit=crop&auto=format",
+  "Phil Oh's Best Street Style \u2013 London Fall 2023": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=400&h=500&fit=crop&auto=format",
+  "Vivienne Westwood Is Remembered in London": "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400&h=500&fit=crop&auto=format",
+  "Why the Short Suit Should Be Your Next Spring Investment": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&h=500&fit=crop&auto=format",
+  "Is This the Trend of the Future? AI Interprets the Fall 2023 Menswear Season": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400&h=500&fit=crop&auto=format",
+  "What Street Style Looked Like a Decade Ago": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=500&fit=crop&auto=format",
+  "Men, Skirts Aren't That Scary\u2014Promise!": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=500&fit=crop&auto=format&hue=45",
+  "Oversized Denim: The Comfort-First Look for Spring": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=400&h=500&fit=crop&auto=format",
+  "The Everyday Sneaker Edit: Best Picks of 2023": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=500&fit=crop&auto=format",
+  "Linen Sets: Your Summer Wardrobe Essential": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=400&h=500&fit=crop&auto=format",
+};
+const BLOCKED_DOMAINS = ["vogue.com", "wwd.com", "hypb.st", "beigebrown.com", "theneguide.com"];
+async function fixBrokenThumbnails() {
+  try {
+    const docs = await fashionCollection.find({}).toArray();
+    let fixedCount = 0;
+    for (const doc of docs) {
+      const broken = !doc.thumbnail || BLOCKED_DOMAINS.some(d => (doc.thumbnail || "").includes(d));
+      if (broken) {
+        const newThumb = UNSPLASH_THUMB_MAP[doc.fashion_title] ||
+          "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=400&h=500&fit=crop&auto=format";
+        await fashionCollection.updateOne({ _id: doc._id }, { $set: { thumbnail: newThumb } });
+        fixedCount++;
+      }
+    }
+    if (fixedCount > 0) console.log(`[Migration] Fixed ${fixedCount} broken thumbnail(s).`);
+    else console.log("[Migration] All thumbnails OK.");
+  } catch (err) {
+    console.error("[Migration] fixBrokenThumbnails error:", err.message);
+  }
+}
+fixBrokenThumbnails();
 
 // Tạo sample Users trong FashionData nếu chưa có
 async function initSampleUsers() {

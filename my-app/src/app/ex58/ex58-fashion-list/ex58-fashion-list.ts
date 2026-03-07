@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Fashion } from '../fashion.model';
 import { Ex58Fashion } from '../ex58-fashion';
@@ -21,6 +21,7 @@ export class Ex58FashionList implements OnInit {
   constructor(
     private service: Ex58Fashion,
     private router: Router,
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -30,7 +31,7 @@ export class Ex58FashionList implements OnInit {
 
   loadStyles(): void {
     this.service.getStyles().subscribe({
-      next: (s) => (this.styles = s),
+      next: (s) => { this.styles = s; this.cdr.markForCheck(); },
       error: () => {},
     });
   }
@@ -38,15 +39,18 @@ export class Ex58FashionList implements OnInit {
   loadFashions(style?: string): void {
     this.loading = true;
     this.errorMessage = '';
+    this.cdr.markForCheck();
     this.service.getAllFashions(style).subscribe({
       next: (data) => {
         this.allFashions = data;
         this.groupByStyle(data);
         this.loading = false;
+        this.cdr.markForCheck();
       },
       error: () => {
         this.errorMessage = 'Không thể tải dữ liệu. Hãy khởi động my-server-mongodb (port 3002).';
         this.loading = false;
+        this.cdr.markForCheck();
       },
     });
   }
@@ -60,14 +64,19 @@ export class Ex58FashionList implements OnInit {
     this.groupedFashions = Array.from(map.entries()).map(([style, items]) => ({ style, items }));
   }
 
+  // Khi chọn dropdown → reset ô tìm rồi lọc
   onStyleChange(): void {
+    this.searchStyle = '';
     this.loadFashions(this.selectedStyle || undefined);
   }
 
+  // Khi bấm Tìm → reset dropdown rồi lọc
   onSearchStyle(): void {
+    this.selectedStyle = '';
     this.loadFashions(this.searchStyle.trim() || undefined);
   }
 
+  // Xóa toàn bộ filter, load lại tất cả
   clearFilter(): void {
     this.selectedStyle = '';
     this.searchStyle = '';
